@@ -2,38 +2,21 @@ import boto3
 
 
 class AWSIngestor:
+    """Handles connection to AWS services."""
+
     def __init__(self, region="ap-south-1"):
         self.region = region
+
         self.ec2 = boto3.client(
             "ec2",
             region_name=self.region
         )
 
-    def get_instances(self):
-        response = self.ec2.describe_instances()
+    def test_connection(self):
+        """Test whether AWS EC2 API is accessible."""
+        response = self.ec2.describe_regions()
 
-        instances = []
-
-        for reservation in response["Reservations"]:
-            for instance in reservation["Instances"]:
-                instances.append({
-                    "id": instance["InstanceId"],
-                    "state": instance["State"]["Name"],
-                    "type": instance["InstanceType"]
-                })
-
-        return instances
-
-    def get_security_groups(self):
-        response = self.ec2.describe_security_groups()
-
-        security_groups = []
-
-        for group in response["SecurityGroups"]:
-            security_groups.append({
-                "id": group["GroupId"],
-                "name": group["GroupName"],
-                "description": group.get("Description", "")
-            })
-
-        return security_groups
+        return {
+            "status": "success",
+            "regions_available": len(response["Regions"])
+        }
