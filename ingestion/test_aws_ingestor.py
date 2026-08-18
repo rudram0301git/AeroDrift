@@ -13,7 +13,7 @@ def test_ec2_ingestion():
 
     instances = ingestor.get_ec2_instances()
 
-    print(f"EC2 instances found: {len(instances)}")
+    print(f"EC2 resources found: {len(instances)}")
 
     for instance in instances:
         print(instance)

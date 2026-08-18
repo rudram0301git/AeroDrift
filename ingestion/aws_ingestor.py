@@ -1,8 +1,9 @@
 import boto3
 
+from ingestion.models import CloudResource
+
 
 class AWSIngestor:
-    """Handles connection to AWS services."""
 
     def __init__(self, region="ap-south-1"):
         self.region = region
@@ -13,7 +14,7 @@ class AWSIngestor:
         )
 
     def test_connection(self):
-        """Test whether AWS EC2 API is accessible."""
+        """Test AWS connection."""
 
         response = self.ec2.describe_regions()
 
@@ -23,7 +24,7 @@ class AWSIngestor:
         }
 
     def get_ec2_instances(self):
-        """Collect EC2 instance information."""
+        """Collect basic EC2 instance information."""
 
         response = self.ec2.describe_instances()
 
@@ -31,13 +32,18 @@ class AWSIngestor:
 
         for reservation in response["Reservations"]:
             for instance in reservation["Instances"]:
-                instances.append({
-                    "instance_id": instance.get("InstanceId"),
-                    "instance_type": instance.get("InstanceType"),
-                    "state": instance.get("State", {}).get("Name"),
-                    "availability_zone": instance.get("Placement", {}).get("AvailabilityZone"),
-                    "vpc_id": instance.get("VpcId"),
-                    "subnet_id": instance.get("SubnetId")
-                })
+
+                resource = CloudResource(
+                    resource_id=instance.get("InstanceId", ""),
+                    resource_type="EC2",
+                    provider="AWS",
+                    region=self.region,
+                    state=instance.get("State", {}).get("Name", ""),
+                    instance_type=instance.get("InstanceType", ""),
+                    vpc_id=instance.get("VpcId", ""),
+                    subnet_id=instance.get("SubnetId", "")
+                )
+
+                instances.append(resource)
 
         return instances
