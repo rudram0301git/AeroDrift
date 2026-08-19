@@ -47,3 +47,24 @@ class AWSIngestor:
                 instances.append(resource)
 
         return instances
+
+    def get_vpcs(self):
+        """Collect basic VPC information."""
+
+        response = self.ec2.describe_vpcs()
+
+        vpcs = []
+
+        for vpc in response["Vpcs"]:
+            resource = CloudResource(
+                resource_id=vpc.get("VpcId", ""),
+                resource_type="VPC",
+                provider="AWS",
+                region=self.region,
+                state=vpc.get("State", ""),
+                cidr_block=vpc.get("CidrBlock", "")
+            )
+
+            vpcs.append(resource)
+
+        return vpcs

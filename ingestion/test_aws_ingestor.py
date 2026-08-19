@@ -18,7 +18,17 @@ def test_ec2_ingestion():
     for instance in instances:
         print(instance)
 
+def test_vpc_ingestion():
+    ingestor = AWSIngestor()
+
+    vpcs = ingestor.get_vpcs()
+
+    print(f"VPC resources found: {len(vpcs)}")
+
+    for vpc in vpcs:
+        print(vpc)
 
 if __name__ == "__main__":
     test_aws_ingestor_creation()
     test_ec2_ingestion()
+    test_vpc_ingestion()
