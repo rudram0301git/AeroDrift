@@ -68,3 +68,26 @@ class AWSIngestor:
             vpcs.append(resource)
 
         return vpcs
+
+    def get_subnets(self):
+         """Collect basic subnet information."""
+
+         response = self.ec2.describe_subnets()
+
+         subnets = []
+
+         for subnet in response["Subnets"]:
+            resource = CloudResource(
+                resource_id=subnet.get("SubnetId", ""),
+                resource_type="SUBNET",
+                provider="AWS",
+                region=self.region,
+                state="available",
+                vpc_id=subnet.get("VpcId", ""),
+                subnet_id=subnet.get("SubnetId", ""),
+                cidr_block=subnet.get("CidrBlock", "")
+            )
+
+            subnets.append(resource)
+
+         return subnets    

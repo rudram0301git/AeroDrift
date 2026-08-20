@@ -32,3 +32,19 @@ if __name__ == "__main__":
     test_aws_ingestor_creation()
     test_ec2_ingestion()
     test_vpc_ingestion()
+
+def test_subnet_ingestion():
+    ingestor = AWSIngestor()
+
+    subnets = ingestor.get_subnets()
+
+    print(f"Subnet resources found: {len(subnets)}")
+
+    for subnet in subnets:
+        print(subnet)
+
+if __name__ == "__main__":
+    test_aws_ingestor_creation()
+    test_ec2_ingestion()
+    test_vpc_ingestion()
+    test_subnet_ingestion()
