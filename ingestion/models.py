@@ -12,3 +12,4 @@ class CloudResource:
     vpc_id: str = ""
     subnet_id: str = ""
     cidr_block: str = ""
+    description: str = ""

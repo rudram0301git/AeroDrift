@@ -79,7 +79,7 @@ class AWSIngestor:
          for subnet in response["Subnets"]:
             resource = CloudResource(
                 resource_id=subnet.get("SubnetId", ""),
-                resource_type="SUBNET",
+                resource_type="SUBNET", 
                 provider="AWS",
                 region=self.region,
                 state="available",
@@ -91,3 +91,24 @@ class AWSIngestor:
             subnets.append(resource)
 
          return subnets    
+
+    def get_security_groups(self):
+        """Collect basic Security Group information."""
+
+        response = self.ec2.describe_security_groups()
+
+        security_groups = []
+
+        for group in response["SecurityGroups"]:
+            resource = CloudResource(
+                resource_id=group.get("GroupId", ""),
+                resource_type="SECURITY_GROUP",
+                provider="AWS",
+                region=self.region,
+                vpc_id=group.get("VpcId", ""),
+                description=group.get("Description", "")
+            )
+
+            security_groups.append(resource)
+
+        return security_groups

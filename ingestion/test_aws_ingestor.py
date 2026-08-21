@@ -48,3 +48,20 @@ if __name__ == "__main__":
     test_ec2_ingestion()
     test_vpc_ingestion()
     test_subnet_ingestion()
+
+def test_security_group_ingestion():
+    ingestor = AWSIngestor()
+
+    security_groups = ingestor.get_security_groups()
+
+    print(f"Security Groups found: {len(security_groups)}")
+
+    for group in security_groups:
+        print(group)
+
+if __name__ == "__main__":
+    test_aws_ingestor_creation()
+    test_ec2_ingestion()
+    test_vpc_ingestion()
+    test_subnet_ingestion()
+    test_security_group_ingestion()
