@@ -65,3 +65,21 @@ if __name__ == "__main__":
     test_vpc_ingestion()
     test_subnet_ingestion()
     test_security_group_ingestion()
+
+def test_route_table_ingestion():
+    ingestor = AWSIngestor()
+
+    route_tables = ingestor.get_route_tables()
+
+    print(f"Route Tables found: {len(route_tables)}")
+
+    for route_table in route_tables:
+        print(route_table)
+
+if __name__ == "__main__":
+    test_aws_ingestor_creation()
+    test_ec2_ingestion()
+    test_vpc_ingestion()
+    test_subnet_ingestion()
+    test_security_group_ingestion()
+    test_route_table_ingestion()

@@ -13,3 +13,4 @@ class CloudResource:
     subnet_id: str = ""
     cidr_block: str = ""
     description: str = ""
+    route_table_id: str = ""

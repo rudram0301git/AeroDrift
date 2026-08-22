@@ -112,3 +112,24 @@ class AWSIngestor:
             security_groups.append(resource)
 
         return security_groups
+
+    def get_route_tables(self):
+         """Collect basic Route Table information."""
+
+         response = self.ec2.describe_route_tables()
+
+         route_tables = []
+
+         for table in response["RouteTables"]:
+            resource = CloudResource(
+                resource_id=table.get("RouteTableId", ""),
+                resource_type="ROUTE_TABLE",
+                provider="AWS",
+                region=self.region,
+                vpc_id=table.get("VpcId", ""),
+                route_table_id=table.get("RouteTableId", "")
+            )
+
+            route_tables.append(resource)
+
+         return route_tables
