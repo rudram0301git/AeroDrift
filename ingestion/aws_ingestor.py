@@ -133,3 +133,27 @@ class AWSIngestor:
             route_tables.append(resource)
 
          return route_tables
+
+    def get_network_interfaces(self):
+        """Collect basic Network Interface information."""
+
+        response = self.ec2.describe_network_interfaces()
+
+        interfaces = []
+
+        for interface in response["NetworkInterfaces"]:
+            resource = CloudResource(
+                resource_id=interface.get("NetworkInterfaceId", ""),
+                resource_type="NETWORK_INTERFACE",
+                provider="AWS",
+                region=self.region,
+                state=interface.get("Status", ""),
+                vpc_id=interface.get("VpcId", ""),
+                subnet_id=interface.get("SubnetId", ""),
+                private_ip=interface.get("PrivateIpAddress", ""),
+                description=interface.get("Description", "")
+            )
+
+            interfaces.append(resource)
+
+        return interfaces

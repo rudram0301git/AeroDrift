@@ -14,3 +14,4 @@ class CloudResource:
     cidr_block: str = ""
     description: str = ""
     route_table_id: str = ""
+    private_ip: str = ""
