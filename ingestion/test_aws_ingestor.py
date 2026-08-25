@@ -102,3 +102,23 @@ if __name__ == "__main__":
     test_security_group_ingestion()
     test_route_table_ingestion()
     test_network_interface_ingestion()
+
+def test_rds_ingestion():
+    ingestor = AWSIngestor()
+
+    databases = ingestor.get_rds_instances()
+
+    print(f"RDS resources found: {len(databases)}")
+
+    for database in databases:
+        print(database)
+
+if __name__ == "__main__":
+    test_aws_ingestor_creation()
+    test_ec2_ingestion()
+    test_vpc_ingestion()
+    test_subnet_ingestion()
+    test_security_group_ingestion()
+    test_route_table_ingestion()
+    test_network_interface_ingestion()
+    test_rds_ingestion()

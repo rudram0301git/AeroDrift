@@ -15,3 +15,4 @@ class CloudResource:
     description: str = ""
     route_table_id: str = ""
     private_ip: str = ""
+    database_engine: str = ""

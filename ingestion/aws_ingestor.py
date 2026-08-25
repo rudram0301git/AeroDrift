@@ -157,3 +157,30 @@ class AWSIngestor:
             interfaces.append(resource)
 
         return interfaces
+
+    def get_rds_instances(self):
+        """Collect basic RDS information."""
+
+        rds = boto3.client(
+            "rds",
+            region_name=self.region
+        )
+
+        response = rds.describe_db_instances()
+
+        databases = []
+
+        for db in response["DBInstances"]:
+            resource = CloudResource(
+                resource_id=db.get("DBInstanceIdentifier", ""),
+                resource_type="RDS",
+                provider="AWS",
+                region=self.region,
+                state=db.get("DBInstanceStatus", ""),
+                vpc_id=db.get("DBSubnetGroup", {}).get("VpcId", ""),
+                database_engine=db.get("Engine", "")
+            )
+
+            databases.append(resource)
+
+        return databases
