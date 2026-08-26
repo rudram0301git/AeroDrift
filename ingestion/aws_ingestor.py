@@ -184,3 +184,25 @@ class AWSIngestor:
             databases.append(resource)
 
         return databases
+
+    def get_s3_buckets(self):
+         """Collect basic S3 bucket information."""
+
+         s3 = boto3.client("s3")
+
+         response = s3.list_buckets()
+
+         buckets = []
+
+         for bucket in response.get("Buckets", []):
+            resource = CloudResource(
+                resource_id=bucket.get("Name", ""),
+                resource_type="S3_BUCKET",
+                provider="AWS",
+                region=self.region,
+                state="available"
+            )
+
+            buckets.append(resource)
+
+         return buckets

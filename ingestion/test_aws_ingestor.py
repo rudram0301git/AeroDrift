@@ -122,3 +122,24 @@ if __name__ == "__main__":
     test_route_table_ingestion()
     test_network_interface_ingestion()
     test_rds_ingestion()
+
+def test_s3_ingestion():
+    ingestor = AWSIngestor()
+
+    buckets = ingestor.get_s3_buckets()
+
+    print(f"S3 buckets found: {len(buckets)}")
+
+    for bucket in buckets:
+        print(bucket)
+
+if __name__ == "__main__":
+    test_aws_ingestor_creation()
+    test_ec2_ingestion()
+    test_vpc_ingestion()
+    test_subnet_ingestion()
+    test_security_group_ingestion()
+    test_route_table_ingestion()
+    test_network_interface_ingestion()
+    test_rds_ingestion()
+    test_s3_ingestion()
