@@ -190,7 +190,11 @@ class AWSIngestor:
 
          s3 = boto3.client("s3")
 
-         response = s3.list_buckets()
+         try:
+           response = s3.list_buckets()
+         except Exception as e:
+           print("Error fetching S3 buckets:", e)
+         return []
 
          buckets = []
 
