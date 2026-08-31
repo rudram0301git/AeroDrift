@@ -206,3 +206,19 @@ class AWSIngestor:
             buckets.append(resource)
 
          return buckets
+
+    def get_all_resources(self):
+         """Collect all supported AWS resources."""
+
+         resources = []
+
+         resources.extend(self.get_ec2_instances())
+         resources.extend(self.get_vpcs())
+         resources.extend(self.get_subnets())
+         resources.extend(self.get_security_groups())
+         resources.extend(self.get_route_tables())
+         resources.extend(self.get_network_interfaces())
+         resources.extend(self.get_rds_instances())
+         resources.extend(self.get_s3_buckets())
+
+         return resources
