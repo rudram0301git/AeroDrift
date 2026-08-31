@@ -226,3 +226,16 @@ class AWSIngestor:
          resources.extend(self.get_s3_buckets())
 
          return resources
+
+    def get_resource_summary(self):
+        """Return a simple summary of AWS resources."""
+
+        resources = self.get_all_resources()
+
+        summary = {}
+
+        for resource in resources:
+         resource_type = resource.resource_type
+        summary[resource_type] = summary.get(resource_type, 0) + 1
+
+        return summary

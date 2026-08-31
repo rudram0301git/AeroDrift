@@ -165,3 +165,26 @@ if __name__ == "__main__":
     test_rds_ingestion()
     test_s3_ingestion()
     test_all_resources()
+
+def test_resource_summary():
+    ingestor = AWSIngestor()
+
+    summary = ingestor.get_resource_summary()
+
+    print("AWS Resource Summary:")
+
+    for resource_type, count in summary.items():
+        print(resource_type, ":", count)
+
+if __name__ == "__main__":
+    test_aws_ingestor_creation()
+    test_ec2_ingestion()
+    test_vpc_ingestion()
+    test_subnet_ingestion()
+    test_security_group_ingestion()
+    test_route_table_ingestion()
+    test_network_interface_ingestion()
+    test_rds_ingestion()
+    test_s3_ingestion()
+    test_all_resources()
+    test_resource_summary()
