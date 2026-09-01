@@ -239,4 +239,9 @@ class AWSIngestor:
          resource_type = resource.resource_type
         summary[resource_type] = summary.get(resource_type, 0) + 1
 
-        return summary
+        print("AWS Resource Summary:")
+
+        for resource_type, count in summary.items():
+         print(f"{resource_type}: {count}")
+
+         return summary

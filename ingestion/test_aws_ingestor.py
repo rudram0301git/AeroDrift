@@ -128,7 +128,7 @@ def test_s3_ingestion():
 
     buckets = ingestor.get_s3_buckets()
 
-    print("S3 buckets found: {len(buckets)}")
+    print("S3 buckets found:", len(buckets))
 
     for bucket in buckets:
         print(bucket)
