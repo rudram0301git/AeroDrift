@@ -225,6 +225,7 @@ class AWSIngestor:
          resources.extend(self.get_rds_instances())
          resources.extend(self.get_s3_buckets())
 
+         print("AWS resource ingestion completed.")
          return resources
 
     def get_resource_summary(self):
