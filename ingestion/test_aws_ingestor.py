@@ -128,10 +128,12 @@ def test_s3_ingestion():
 
     buckets = ingestor.get_s3_buckets()
 
-    print(f"S3 buckets found: {len(buckets)}")
+    print("S3 buckets found: {len(buckets)}")
 
     for bucket in buckets:
         print(bucket)
+
+    print("S3 ingestion test completed successfully")
 
 if __name__ == "__main__":
     test_aws_ingestor_creation()
