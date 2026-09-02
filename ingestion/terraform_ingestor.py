@@ -10,3 +10,17 @@ class TerraformIngestor:
             content = file.read()
 
         return content
+
+import re
+
+def extract_resources(self):
+     """Extract Terraform resources."""
+
+     content = self.read_file()
+
+     resources = re.findall(
+        r'resource\s+"([^"]+)"\s+"([^"]+)"',
+        content
+    )
+
+     return resources
