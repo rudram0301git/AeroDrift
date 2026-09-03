@@ -15,3 +15,20 @@ def log_resource(resource) -> None:
         resource.resource_type,
         resource.provider,
     )
+
+def normalize_resource(
+    resource_id,
+    resource_type,
+    provider,
+    region="",
+    state=""
+):
+    """Create a common CloudResource format."""
+
+    return CloudResource(
+        resource_id=resource_id,
+        resource_type=resource_type,
+        provider=provider,
+        region=region,
+        state=state
+    )
