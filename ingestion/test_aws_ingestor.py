@@ -190,3 +190,18 @@ if __name__ == "__main__":
     test_s3_ingestion()
     test_all_resources()
     test_resource_summary()
+
+def test_relationships():
+
+    ingestor = AWSIngestor()
+
+    resources = ingestor.get_all_resources()
+
+    relationships = extract_relationships(resources)
+
+    print("Resource relationships:")
+
+    for relationship in relationships:
+        print(relationship)
+
+    print("Resource relationship extraction completed successfully")
