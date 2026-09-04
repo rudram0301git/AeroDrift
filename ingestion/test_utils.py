@@ -28,3 +28,19 @@ def test_resource_validation():
 
 if __name__ == "__main__":
     test_resource_validation()
+
+def test_validation_function():
+
+    print("Testing resource validation...")
+
+    result = validate_resource(None)
+
+    if result is False:
+        print("Validation test passed")
+    else:
+        print("Validation test failed")
+
+
+if __name__ == "__main__":
+    test_resource_validation()
+    test_validation_function()
