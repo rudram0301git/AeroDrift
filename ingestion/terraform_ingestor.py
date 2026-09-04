@@ -1,3 +1,6 @@
+import re
+
+
 class TerraformIngestor:
 
     def __init__(self, file_path):
@@ -11,16 +14,14 @@ class TerraformIngestor:
 
         return content
 
-import re
+    def extract_resources(self):
+        """Extract Terraform resources."""
 
-def extract_resources(self):
-     """Extract Terraform resources."""
+        content = self.read_file()
 
-     content = self.read_file()
+        resources = re.findall(
+            r'resource\s+"([^"]+)"\s+"([^"]+)"',
+            content
+        )
 
-     resources = re.findall(
-        r'resource\s+"([^"]+)"\s+"([^"]+)"',
-        content
-    )
-
-     return resources
+        return resources
