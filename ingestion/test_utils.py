@@ -12,3 +12,19 @@ def test_normalization():
     print(resource)
 
     print("Resource normalization completed successfully")
+
+from ingestion.utils import validate_resource, validate_resources
+
+
+def test_resource_validation():
+
+    resources = []
+
+    valid_resources = validate_resources(resources)
+
+    print("Resource validation completed successfully")
+    print("Valid resources:", len(valid_resources))
+
+
+if __name__ == "__main__":
+    test_resource_validation()
