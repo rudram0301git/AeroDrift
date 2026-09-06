@@ -1,0 +1,40 @@
+from .graph import CloudGraph
+from .nodes import Node
+from .edges import Edge
+
+
+class GraphBuilder:
+    """
+    Build topology graph from cloud resources.
+    """
+
+    def build(self, resources):
+
+        graph = CloudGraph()
+
+        for resource in resources:
+
+            node = Node(
+                resource.resource_id,
+                resource.resource_type
+            )
+
+            graph.add_node(node)
+
+        for resource in resources:
+
+            details = resource.details
+
+            vpc_id = details.get("vpc_id")
+
+            if vpc_id:
+
+                edge = Edge(
+                    source=resource.resource_id,
+                    target=vpc_id,
+                    relationship="BELONGS_TO"
+                )
+
+                graph.add_edge(edge)
+
+        return graph
