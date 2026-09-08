@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AeroDrift Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>AeroDrift</h1>
+        <p>Agentic Cloud Topology & Remediation Graph</p>
+    </header>
+
+    <main>
+
+        <section class="welcome">
+            <h2>Cloud Infrastructure Dashboard</h2>
+            <p>
+                Monitor cloud resources, topology relationships,
+                and remediation activities.
+            </p>
+        </section>
+
+        <section class="cards">
+
+            <div class="card">
+                <h3>AWS Resources</h3>
+                <p class="number" id="aws-count">8</p>
+                <p>Resources discovered</p>
+            </div>
+
+            <div class="card">
+                <h3>Terraform Resources</h3>
+                <p class="number" id="terraform-count">1</p>
+                <p>Resources detected</p>
+            </div>
+
+            <div class="card">
+                <h3>Relationships</h3>
+                <p class="number" id="relationship-count">3</p>
+                <p>Resource relationships</p>
+            </div>
+
+            <div class="card">
+                <h3>Remediation</h3>
+                <p class="number" id="remediation-count">2</p>
+                <p>Actions available</p>
+            </div>
+
+        </section>
+
+        <section class="resources">
+
+            <h2>Cloud Resources</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Resource ID</th>
+                        <th>Type</th>
+                        <th>Provider</th>
+                        <th>Region</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="resource-table">
+
+                    <tr>
+                        <td>vpc-001</td>
+                        <td>VPC</td>
+                        <td>AWS</td>
+                        <td>ap-south-1</td>
+                        <td class="active">Active</td>
+                    </tr>
+
+                    <tr>
+                        <td>subnet-001</td>
+                        <td>Subnet</td>
+                        <td>AWS</td>
+                        <td>ap-south-1</td>
+                        <td class="active">Active</td>
+                    </tr>
+
+                    <tr>
+                        <td>sg-001</td>
+                        <td>Security Group</td>
+                        <td>AWS</td>
+                        <td>ap-south-1</td>
+                        <td class="active">Active</td>
+                    </tr>
+
+                    <tr>
+                        <td>example</td>
+                        <td>aws_s3_bucket</td>
+                        <td>Terraform</td>
+                        <td>-</td>
+                        <td class="detected">Detected</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <section class="topology">
+
+            <h2>Resource Relationships</h2>
+
+            <div class="relationship">
+
+                <div class="node">
+                    VPC
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="node">
+                    Subnet
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="node">
+                    Security Group
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="remediation">
+
+            <h2>Remediation Actions</h2>
+
+            <div class="action">
+
+                <div>
+                    <h3>Security Group Check</h3>
+                    <p>
+                        Review security group configuration.
+                    </p>
+                </div>
+
+                <button onclick="runRemediation()">
+                    Run Check
+                </button>
+
+            </div>
+
+            <div class="action">
+
+                <div>
+                    <h3>Resource Validation</h3>
+                    <p>
+                        Validate cloud resource information.
+                    </p>
+                </div>
+
+                <button onclick="runValidation()">
+                    Validate
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>AeroDrift Cloud Infrastructure Management</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
 def test_terraform_resources():
 
-    ingestor = TerraformIngestor("main.tf")
+    ingestor = TerraformIngestor("ingestion/main.tf")
 
     resources = ingestor.extract_resources()
 

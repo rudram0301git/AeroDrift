@@ -245,3 +245,19 @@ class AWSIngestor:
          print(f"{resource_type}: {count}")
 
          return summary
+
+    def extract_relationships(resources):
+     """Extract simple resource relationships."""
+
+     relationships = []
+
+     for resource in resources:
+
+         if resource.vpc_id:
+             relationships.append({
+                 "source": resource.resource_id,
+                 "relationship": "belongs_to",
+                 "target": resource.vpc_id
+             })
+
+     return relationships

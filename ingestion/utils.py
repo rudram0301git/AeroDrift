@@ -15,3 +15,49 @@ def log_resource(resource) -> None:
         resource.resource_type,
         resource.provider,
     )
+
+def normalize_resource(
+    resource_id,
+    resource_type,
+    provider,
+    region="",
+    state=""
+):
+    """Create a common CloudResource format."""
+
+    return CloudResource(
+        resource_id=resource_id,
+        resource_type=resource_type,
+        provider=provider,
+        region=region,
+        state=state
+    )
+
+def validate_resource(resource):
+    """Validate basic cloud resource information."""
+
+    if resource is None:
+        return False
+
+    if not resource.resource_id:
+        return False
+
+    if not resource.resource_type:
+        return False
+
+    if not resource.provider:
+        return False
+
+    return True
+
+
+def validate_resources(resources):
+    """Return only valid resources."""
+
+    valid_resources = []
+
+    for resource in resources:
+        if validate_resource(resource):
+            valid_resources.append(resource)
+
+    return valid_resources
